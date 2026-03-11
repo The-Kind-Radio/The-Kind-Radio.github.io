@@ -8,7 +8,7 @@
   <meta property="og:title"       content="The Kind Radio" />
   <meta property="og:description" content="Kind music for kind people. Listen live 24/7." />
   <meta property="og:image"       content="https://the-kind-radio.github.io/icon.png" />
-  <link rel="icon" href="https://193.122.84.178:8000/app_icon.png" />
+  <link rel="icon" href="https://thekindradio.duckdns.org/app_icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
 
@@ -339,7 +339,7 @@
         <div class="art-aura"></div>
         <div class="ring"></div><div class="ring"></div><div class="ring"></div>
         <img class="art-img" id="artImg"
-             src="http://193.122.84.178:8000/app_icon.png"
+             src="https://thekindradio.duckdns.org/app_icon.png"
              alt="The Kind Radio"
              onerror="this.onerror=null;this.src='https://the-kind-radio.github.io/icons/Icon-512.png'" />
       </div>
@@ -383,8 +383,8 @@
         </div>
 
         <div class="err" id="errBox">
-          Your browser is blocking the HTTP stream on this HTTPS page.<br/>
-          <a href="http://193.122.84.178:8000/stream" target="_blank" rel="noopener">Open stream directly ↗</a>
+          Could not connect to the stream. Please try again in a moment.<br/>
+          <a href="https://thekindradio.duckdns.org/stream" target="_blank" rel="noopener">Open stream directly ↗</a>
         </div>
 
       </div>
@@ -431,8 +431,8 @@
   <script>
   (() => {
     /* ── Config ─────────────────────────────────────────────── */
-    const STREAM = 'http://193.122.84.178:8000/stream';
-    const STATUS = 'http://193.122.84.178:8000/status-json.xsl';
+    const STREAM = 'https://thekindradio.duckdns.org/stream';
+    const STATUS = 'https://thekindradio.duckdns.org/status-json.xsl';
 
     /* ── Refs ───────────────────────────────────────────────── */
     const aud   = document.getElementById('audio');
