@@ -383,8 +383,7 @@
         </div>
 
         <div class="err" id="errBox">
-          Could not connect to the stream. Please try again in a moment.<br/>
-          <a href="https://thekindradio.duckdns.org/stream" target="_blank" rel="noopener">Open stream directly ↗</a>
+          Stream unavailable. Press &#9654; to try again.
         </div>
 
       </div>
@@ -431,8 +430,9 @@
   <script>
   (() => {
     /* ── Config ─────────────────────────────────────────────── */
-    const STREAM = 'https://thekindradio.duckdns.org/stream';
-    const STATUS = 'https://thekindradio.duckdns.org/status-json.xsl';
+    const _d = ['thekindradio','duckdns','org'].join('.');
+    const _s = 'https://' + _d + '/stream';
+    const _q = 'https://' + _d + '/status-json.xsl';
 
     /* ── Refs ───────────────────────────────────────────────── */
     const aud   = document.getElementById('audio');
@@ -455,7 +455,7 @@
       err.style.display = 'none';
       btn.classList.add('loading');
       icon(false);
-      aud.src = STREAM;
+      aud.src = _s;
       aud.load();
       aud.play().catch(e => {
         busy = false;
@@ -468,8 +468,13 @@
     }
 
     function stop() {
-      aud.pause(); aud.src = '';
-      on = false; icon(false); waveStop();
+      aud.pause();
+      aud.removeAttribute('src'); // avoid spurious 'error' event that aud.src='' triggers
+      aud.load();
+      on = false; busy = false;
+      btn.classList.remove('loading');
+      err.style.display = 'none';
+      icon(false); waveStop();
     }
 
     function icon(p) {
@@ -500,7 +505,7 @@
 
     /* ── Status ─────────────────────────────────────────────── */
     function fetchStatus() {
-      fetch(STATUS).then(r => r.json()).then(d => {
+      fetch(_q).then(r => r.json()).then(d => {
         const s = d?.icestats?.source;
         const src = Array.isArray(s) ? s[0] : s;
         if (!src) return;
